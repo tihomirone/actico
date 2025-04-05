@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250405_01
+      author: Tihomir.Blagoev
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+  - changeSet:
+      id: 20250405_02
+      author: Tihomir.Blagoev
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'Name1'
+              - column:
+                  name: email
+                  value: 'email1@mail.com'
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'Name2'
+              - column:
+                  name: email
+                  value: 'email2@mail.com'
