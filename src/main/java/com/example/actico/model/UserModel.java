@@ -16,4 +16,11 @@ public class UserModel {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country_code")
+    @Enumerated(EnumType.STRING)
+    private CountryCode countryCode;
 }

@@ -16,6 +16,12 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(255)
               - column:
+                  name: city
+                  type: VARCHAR(100)
+              - column:
+                  name: country_code
+                  type: ENUM('BG', 'RO', 'DE')
+              - column:
                   name: email
                   type: VARCHAR(255)
                   constraints:
@@ -29,16 +35,58 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: 'Name1'
+                  value: 'NameBG'
               - column:
                   name: email
-                  value: 'email1@mail.com'
+                  value: 'email_bg@mail.com'
+              - column:
+                  name: city
+                  value: 'Sofia'
+              - column:
+                  name: country_code
+                  value: 'BG'
         - insert:
             tableName: users
             columns:
               - column:
                   name: name
-                  value: 'Name2'
+                  value: 'NameRO'
               - column:
                   name: email
-                  value: 'email2@mail.com'
+                  value: 'email_ro@mail.com'
+              - column:
+                  name: city
+                  value: 'Bucharest'
+              - column:
+                  name: country_code
+                  value: 'RO'
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'NameDE1'
+              - column:
+                  name: email
+                  value: 'email_de1@mail.com'
+              - column:
+                  name: city
+                  value: 'Berlin'
+              - column:
+                  name: country_code
+                  value: 'DE'
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'NameDE2'
+              - column:
+                  name: email
+                  value: 'email_de2@mail.com'
+              - column:
+                  name: city
+                  value: 'Munich'
+              - column:
+                  name: country_code
+                  value: 'DE'
