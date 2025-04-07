@@ -3,7 +3,8 @@ package com.example.actico.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity(name = "EMPLOYEE")
+@Entity
+@Table(name = "EMPLOYEE")
 @Data
 public class EmployeeModel {
 
@@ -14,11 +15,11 @@ public class EmployeeModel {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private UserModel userModel;
+    private UserModel user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_name")
-    private DepartmentModel departmentModel;
+    private DepartmentModel department;
 
     @Column(name = "job_domain")
     @Enumerated(EnumType.STRING)

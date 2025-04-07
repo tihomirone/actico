@@ -5,7 +5,6 @@ import com.example.actico.model.UserModel;
 import com.example.actico.persistence.UsersRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;

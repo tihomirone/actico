@@ -7,7 +7,8 @@ import org.springframework.util.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity(name = "DEPARTMENT")
+@Entity
+@Table(name = "DEPARTMENT")
 @Data
 public class DepartmentModel {
 

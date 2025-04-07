@@ -3,7 +3,8 @@ package com.example.actico.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity(name = "USERS")
+@Entity
+@Table(name = "USERS")
 @Data
 public class UserModel {
 
