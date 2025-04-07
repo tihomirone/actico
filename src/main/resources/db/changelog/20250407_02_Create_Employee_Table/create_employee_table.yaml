@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250407_01
+      author: Tihomir.Blagoev
+      changes:
+        - createTable:
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_employee_user
+                    references: users(id)
+              - column:
+                  name: department_name
+                  type: ENUM('IT', 'SALES')
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_employee_department
+                    references: department(name)
+              - column:
+                  name: job_domain
+                  type: ENUM('DEV', 'DEVOPS', 'SYS', 'MAN', 'PO')
+              - column:
+                  name: level
+                  type: INTEGER
+  - changeSet:
+      id: 20250407_02
+      author: Tihomir.Blagoev
+      changes:
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: department_name
+                  value: 'IT'
+              - column:
+                  name: job_domain
+                  value: 'DEV'
+              - column:
+                  name: level
+                  value: 4
+
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: department_name
+                  value: 'IT'
+              - column:
+                  name: job_domain
+                  value: 'DEV'
+              - column:
+                  name: level
+                  value: 5
+
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: department_name
+                  value: 'IT'
+              - column:
+                  name: job_domain
+                  value: 'DEVOPS'
+              - column:
+                  name: level
+                  value: 4
+
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: user_id
+                  value: 4
+              - column:
+                  name: department_name
+                  value: 'SALES'
+              - column:
+                  name: job_domain
+                  value: 'MAN'
+              - column:
+                  name: level
+                  value: 2

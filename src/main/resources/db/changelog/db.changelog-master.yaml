@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/20250405_01_Create_User_Table/create_user_table.yaml
+      file: db/changelog/20250405_01_Create_User_Table/create_users_table.yaml
+  - include:
+      file: db/changelog/20250407_01_Create_Department_Table/create_department_table.yaml
+  - include:
+      file: db/changelog/20250407_02_Create_Employee_Table/create_employee_table.yaml

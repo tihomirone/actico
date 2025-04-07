@@ -1,22 +1,23 @@
 package com.example.actico.controller;
 
 import com.example.actico.dto.User;
-import com.example.actico.exception.BusinessException;
 import com.example.actico.mapper.UserMapper;
 import com.example.actico.model.CountryCode;
+import com.example.actico.model.UserModel;
 import com.example.actico.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.actico.exception.ErrorCode.DATA_MISSING_OR_EMPTY;
 import static com.example.actico.exception.ErrorCode.NOT_VALID_DATA;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Slf4j
 public class UserController {
 
@@ -24,41 +25,41 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
-
-        return UserMapper.INSTANCE.toUsers(userService.findAll());
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(UserMapper.INSTANCE.toUsers(userService.findAll()));
     }
 
-    @GetMapping("/{countryCode}")
-    public List<User> getUsersFromCountry(@PathVariable String countryCode) {
+    @GetMapping("/country-code/{countryCode}")
+    public ResponseEntity<List<User>> getUsersFromCountry(@PathVariable String countryCode) {
         if (!StringUtils.hasText(countryCode)) {
-            log.warn("No country code specified!");
-            throw new BusinessException("No country code specified!", DATA_MISSING_OR_EMPTY);
+            log.error("No country code specified!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(List.of());
         }
-
-
         CountryCode code;
         try {
             code = CountryCode.valueOf(countryCode);
         } catch (IllegalArgumentException iae) {
-            throw new BusinessException("The country code is not valid!", NOT_VALID_DATA);
+            log.error("Not valid country code {}!", NOT_VALID_DATA);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(List.of());
         }
-
-        return UserMapper.INSTANCE.toUsers(userService.findByCountryCode(code));
+        List<UserModel> usersFound = userService.findByCountryCode(code);
+        if (usersFound.isEmpty()) {
+            log.info("No users found for country code {}!", countryCode);
+        }
+        return ResponseEntity.ok(UserMapper.INSTANCE.toUsers(usersFound));
     }
 
-    @GetMapping("/id/{id}")
-    public User getUserFromCountry(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserFromCountry(@PathVariable Long id) {
         if (id == null || id < 1) {
-            log.warn("User ID not specified or not positive number {}!!", id);
-            throw new BusinessException("User ID not specified or not positive number!", DATA_MISSING_OR_EMPTY);
+            log.error("User ID not specified or not positive number {}!", id);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-
         if (userService.getById(id).isPresent()) {
-            return UserMapper.INSTANCE.toUser(userService.getById(id).get());
+            return ResponseEntity.ok(UserMapper.INSTANCE.toUser(userService.getById(id).get()));
         } else {
-            log.info("No user found for ID {}", id);
-            return null;
+            log.error("No user found for ID {}", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 }

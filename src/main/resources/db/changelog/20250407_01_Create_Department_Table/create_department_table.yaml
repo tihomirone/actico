@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250407_01
+      author: Tihomir.Blagoev
+      changes:
+        - createTable:
+            tableName: department
+            columns:
+              - column:
+                  name: name
+                  type: ENUM('IT', 'SALES')
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: emails
+                  type: VARCHAR(255)
+  - changeSet:
+      id: 20250407_02
+      author: Tihomir.Blagoev
+      changes:
+        - insert:
+            tableName: department
+            columns:
+              - column:
+                  name: name
+                  value: 'IT'
+              - column:
+                  name: description
+                  value: 'Java and DB development'
+              - column:
+                  name: emails
+                  value: 'email_it@mail.com'
+        - insert:
+            tableName: department
+            columns:
+              - column:
+                  name: name
+                  value: 'SALES'
+              - column:
+                  name: description
+                  value: 'Sales and marketing'
+              - column:
+                  name: emails
+                  value: 'email_sales@mail.com'
