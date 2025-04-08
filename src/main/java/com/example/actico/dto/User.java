@@ -11,5 +11,5 @@ public class User {
     private String name;
     private String email;
     private String city;
-    private CountryCode countryCode;
+    private String countryCode;
 }
