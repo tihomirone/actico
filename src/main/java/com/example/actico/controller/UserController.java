@@ -65,6 +65,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createNewUser(@RequestBody User user) {
+        log.info("Creating a new user {}", user);
         userService.validateUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createNewUser(user));
     }

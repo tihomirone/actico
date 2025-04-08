@@ -43,6 +43,7 @@ public class EmployeeController {
         List<EmployeeModel> employees = employeeService.findEmployeesByDepartment(depName);
         if (employees.isEmpty()) {
             log.info("No employees found for department {}!", departmentName);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(List.of());
         }
         return ResponseEntity.ok(EmployeeMapper.INSTANCE.toEmployees(employees));
     }

@@ -50,10 +50,6 @@ public class UserService {
             log.error("User is empty!");
             throw new BusinessException("User is empty!", DATA_MISSING_OR_EMPTY);
         }
-        if (!StringUtils.hasText(user.getName())) {
-            log.error("User name is empty!");
-            throw new BusinessException("User is empty!", NOT_VALID_DATA);
-        }
         validateTextFieldNotEmpty(user.getName(), "User name is empty!");
         validateTextFieldNotEmpty(user.getEmail(), "User email is empty!");
         validateTextFieldNotEmpty(user.getCity(), "User city is empty!");
