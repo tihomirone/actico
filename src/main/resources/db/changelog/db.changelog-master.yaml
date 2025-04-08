@@ -5,3 +5,7 @@ databaseChangeLog:
       file: db/changelog/20250407_01_Create_Department_Table/create_department_table.yaml
   - include:
       file: db/changelog/20250407_02_Create_Employee_Table/create_employee_table.yaml
+  - include:
+      file: db/changelog/20250408_01_Create_Customer_Table/create_customer_table.yaml
+  - include:
+      file: db/changelog/20250408_02_Create_BankAccount_Table/create_bank_account_table.yaml
